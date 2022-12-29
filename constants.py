@@ -5,3 +5,5 @@ MIN_CRASHES = 60
 DEFAULT_AREA = "Vancouver"
 AREA_2_FILE_GLOB = {"Vancouver": "data/vancouver.csv",
                     "Metro Vancouver": "data/metro-van/*.csv"}
+
+MAX_SITE_NAME_LENGHTH = 100

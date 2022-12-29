@@ -9,7 +9,7 @@ from pathlib import Path
 import tweepy
 
 from constants import ICBC_DATA_START_YEAR, ICBC_DATA_END_YEAR, MIN_CRASHES, \
-                      AREA_2_FILE_GLOB, DEFAULT_AREA
+                      AREA_2_FILE_GLOB, DEFAULT_AREA, MAX_SITE_NAME_LENGHTH
 
 
 def get_area():
@@ -41,6 +41,9 @@ def get_tweet_text(area=DEFAULT_AREA):
     location_crashnums = _get_crash_data(area=area)
     site, num_crashes, muni = random.choice(location_crashnums)
     location_type = "intersection" if "&" in site else "street"
+
+    if len(site) > MAX_SITE_NAME_LENGHTH:
+        site = f"{site[:MAX_SITE_NAME_LENGHTH - 3]}..."
 
     ret_text = (f"Today's featured dangerous {location_type}:\n"
                 f"{string.capwords(site)}, {string.capwords(muni)}\n"
