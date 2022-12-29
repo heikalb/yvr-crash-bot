@@ -2,8 +2,13 @@ import os
 import csv
 import random
 import string
+from glob import iglob
+from pathlib import Path
 
 import tweepy
+
+from constants import ICBC_DATA_START_YEAR, ICBC_DATA_END_YEAR, MIN_CRASHES, \
+                      AREA_2_FILE_GLOB
 
 
 def get_twitter_client():
@@ -22,26 +27,36 @@ def get_twitter_client():
     return twitter_client
 
 
-def get_tweet_text():
-    muni = "Vancouver"
-
-    with open("data/vancouver.csv", encoding="utf16") as f:
-        reader = csv.reader(f, delimiter='\t')
-        next(reader)
-        location_crashnums = [r for r in reader if int(r[1]) > 60]
-
-    location, num_crashes = random.choice(location_crashnums)
-    location_type = "intersection" if "&" in location else "street"
+def get_tweet_text(area="Vancouver"):
+    location_crashnums = _get_crash_data(area=area)
+    site, num_crashes, muni = random.choice(location_crashnums)
+    location_type = "intersection" if "&" in site else "street"
 
     ret_text = (f"Today's featured dangerous {location_type}:\n"
-                f"{string.capwords(location)} ({muni})\n"
-                f"with {num_crashes} crashes causing injury or death 2017-2021")
+                f"{string.capwords(site)}, {muni}\n"
+                f"with {num_crashes} crashes causing injury or death "
+                f"{ICBC_DATA_START_YEAR}-{ICBC_DATA_END_YEAR}")
 
     return ret_text
 
 
-if __name__ == '__main__':
-    client = get_twitter_client()
-    text_to_tweet = get_tweet_text()
+def _get_crash_data(area="Vancouver"):
+    data_file_glob = AREA_2_FILE_GLOB.get(area)
+    location_crashnums = []
 
+    for fp in iglob(data_file_glob):
+        with open(fp, encoding="utf16") as f:
+            reader = csv.reader(f, delimiter='\t')
+            next(reader)
+            curr_muni = Path(fp).stem.capitalize()
+            location_crashnums.extend((r[0], r[1], curr_muni)
+                                      for r in reader if int(r[1]) > MIN_CRASHES)
+
+    return location_crashnums
+
+
+if __name__ == '__main__':
+    area = random.choice(["Vancouver", "Metro Vancouver"])
+    client = get_twitter_client()
+    text_to_tweet = get_tweet_text(area=area)
     response = client.create_tweet(text=text_to_tweet)
