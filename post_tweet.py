@@ -43,7 +43,7 @@ def get_tweet_text(area=DEFAULT_AREA):
     location_type = "intersection" if "&" in site else "street"
 
     ret_text = (f"Today's featured dangerous {location_type}:\n"
-                f"{string.capwords(site)}, {muni}\n"
+                f"{string.capwords(site)}, {string.capwords(muni)}\n"
                 f"with {num_crashes} crashes causing injury or death "
                 f"{ICBC_DATA_START_YEAR}-{ICBC_DATA_END_YEAR}")
 
