@@ -1,5 +1,7 @@
 import os
-import datetime
+import csv
+import random
+import string
 
 import tweepy
 
@@ -21,7 +23,21 @@ def get_twitter_client():
 
 
 def get_tweet_text():
-    return f"This is a drone bird. Testing testing... {datetime.datetime.now()}"
+    muni = "Vancouver"
+
+    with open("data/vancouver.csv", encoding="utf16") as f:
+        reader = csv.reader(f, delimiter='\t')
+        next(reader)
+        location_crashnums = [r for r in reader if int(r[1]) > 60]
+
+    location, num_crashes = random.choice(location_crashnums)
+    location_type = "intersection" if "&" in location else "street"
+
+    ret_text = (f"Today's featured dangerous {location_type}:\n"
+                f"{string.capwords(location)} ({muni})\n"
+                f"with {num_crashes} crashes causing injury or death 2017-2021")
+
+    return ret_text
 
 
 if __name__ == '__main__':
