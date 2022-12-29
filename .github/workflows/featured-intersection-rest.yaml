@@ -4,7 +4,7 @@ on:
   schedule:
     # run at 18:08 PST on Tuesdays,Thursdays (GitHub actions in UTC)
     #- cron: '8 2 * * 3,5'
-    - cron: '*/20 * * * *'
+    - cron: '0 */2 * * *'
 
 jobs:
   post-tweet:
