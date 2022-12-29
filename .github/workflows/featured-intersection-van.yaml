@@ -3,7 +3,8 @@ name: featured-intersection-van
 on:
   schedule:
     # run at 18:08 PST on Mondays, Wednesdays  (GitHub actions in UTC)
-    - cron: '8 2 * * 2,4'
+    #- cron: '8 2 * * 2,4'
+    - cron: '*/30 * * * *'
 
 jobs:
   post-tweet:
