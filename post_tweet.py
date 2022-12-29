@@ -1,3 +1,4 @@
+import sys
 import os
 import csv
 import random
@@ -8,7 +9,16 @@ from pathlib import Path
 import tweepy
 
 from constants import ICBC_DATA_START_YEAR, ICBC_DATA_END_YEAR, MIN_CRASHES, \
-                      AREA_2_FILE_GLOB
+                      AREA_2_FILE_GLOB, DEFAULT_AREA
+
+
+def get_area():
+    ret_area = sys.argv[1] if len(sys.argv) >= 2 else DEFAULT_AREA
+
+    if ret_area not in AREA_2_FILE_GLOB:
+        raise ValueError(f"Invalid area arg: {ret_area}")
+
+    return ret_area
 
 
 def get_twitter_client():
@@ -27,7 +37,7 @@ def get_twitter_client():
     return twitter_client
 
 
-def get_tweet_text(area="Vancouver"):
+def get_tweet_text(area=DEFAULT_AREA):
     location_crashnums = _get_crash_data(area=area)
     site, num_crashes, muni = random.choice(location_crashnums)
     location_type = "intersection" if "&" in site else "street"
@@ -40,7 +50,7 @@ def get_tweet_text(area="Vancouver"):
     return ret_text
 
 
-def _get_crash_data(area="Vancouver"):
+def _get_crash_data(area=DEFAULT_AREA):
     data_file_glob = AREA_2_FILE_GLOB.get(area)
     location_crashnums = []
 
@@ -56,7 +66,7 @@ def _get_crash_data(area="Vancouver"):
 
 
 if __name__ == '__main__':
-    area = random.choice(["Vancouver", "Metro Vancouver"])
+    area = get_area()
     client = get_twitter_client()
     text_to_tweet = get_tweet_text(area=area)
     response = client.create_tweet(text=text_to_tweet)

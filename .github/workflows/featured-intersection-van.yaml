@@ -1,8 +1,9 @@
-name: yvr-crash-bot
+name: featured-intersection-van
 
 on:
   schedule:
-    - cron: '0 * * * *'
+    # run at 18:08 PST on Mondays, Wednesdays  (GitHub actions in UTC)
+    - cron: '8 2 * * 2,4'
 
 jobs:
   post-tweet:
@@ -22,4 +23,4 @@ jobs:
       - name: Install requirements
         run: python3 -m pip install -r requirements.txt
       - name: Post tweet
-        run: python3 post_tweet.py
+        run: python3 post_tweet.py "Vancouver"
