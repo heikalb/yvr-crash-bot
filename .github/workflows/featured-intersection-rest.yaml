@@ -2,9 +2,8 @@ name: featured-intersection-rest
 
 on:
   schedule:
-    # run at 18:08 PST on Tuesdays,Thursdays (GitHub actions in UTC)
-    #- cron: '8 2 * * 3,5'
-    - cron: '0 */4 * * *'
+    # run at 18:28 PST on Tuesdays,Thursdays (GitHub actions in UTC)
+    - cron: '28 2 * * 3,5'
 
 jobs:
   post-tweet:
