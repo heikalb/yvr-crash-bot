@@ -1,6 +1,6 @@
 # yvr-crash-bot
-Twitter bot displaying data on traffic crashes in Metro Vancouver (Canada). 
-The goal is to raise public awareness of traffic violence.
+Twitter bot displaying data on traffic crashes in Metro Vancouver (Canada): https://twitter.com/yvr_crash_bot
+. The goal is to raise public awareness of traffic violence.
 A project of Vision Zero Vancouver: https://visionzerovancouver.ca/, https://twitter.com/VisionZeroYVR
 
 ## Features
