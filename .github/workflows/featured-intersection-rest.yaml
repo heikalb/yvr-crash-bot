@@ -4,7 +4,7 @@ on:
   schedule:
     # run at 18:08 PST on Tuesdays,Thursdays (GitHub actions in UTC)
     #- cron: '8 2 * * 3,5'
-    - cron: '0 */2 * * *'
+    - cron: '0 */4 * * *'
 
 jobs:
   post-tweet:
@@ -16,11 +16,12 @@ jobs:
       TWITTER_ACCESS_TOKEN_SECRET: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
       TWITTER_BEARER_TOKEN: ${{ secrets.TWITTER_BEARER_TOKEN }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up Python 3.7
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v4
         with:
           python-version: "3.7"
+          cache: 'pip'
       - name: Install requirements
         run: python3 -m pip install -r requirements.txt
       - name: Post tweet
