@@ -6,6 +6,8 @@ import datetime
 
 from utils import get_twitter_client
 
+MAX_LOC_LEN = 197
+
 
 def get_tweet_text():
     datum = _get_data()
@@ -16,7 +18,7 @@ def get_tweet_text():
         location_preposition = "at" if "&" in datum['LOCATION_NAME'] else "on"
         location = datum['LOCATION_NAME'].split("#")[0].strip()
         # To keep within Twitter char limit
-        location = f"{datum['LOCATION_NAME'][:197 - 3]}..." if len(location) > 172 else location
+        location = f"{datum['LOCATION_NAME'][:MAX_LOC_LEN - 3]}..." if len(location) > MAX_LOC_LEN else location
         full_location = f"{location_preposition} {string.capwords(location)}, {string.capwords(datum['CITY'])}"
     else:
         full_location = f"in {string.capwords(datum['CITY'])}"
