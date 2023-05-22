@@ -30,7 +30,7 @@ def get_tweet_text():
 
 
 def _get_data():
-    data_fpath = Path(__file__).parent / "data/RDAR-22116-Report-data.tsv"
+    data_fpath = Path(__file__).parent / "data" / "RDAR-22116-Report-data.tsv"
     curr_month = datetime.datetime.now().strftime("%B")
 
     with open(data_fpath) as f:
