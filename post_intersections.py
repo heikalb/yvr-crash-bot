@@ -1,13 +1,11 @@
 import sys
-import os
 import csv
 import random
 import string
 from glob import iglob
 from pathlib import Path
 
-import tweepy
-
+from utils import get_twitter_client
 from constants import ICBC_DATA_START_YEAR, ICBC_DATA_END_YEAR, MIN_CRASHES, \
                       AREA_2_FILE_GLOB, DEFAULT_AREA, MAX_SITE_NAME_LENGHTH
 
@@ -19,22 +17,6 @@ def get_area():
         raise ValueError(f"Invalid area arg: {ret_area}")
 
     return ret_area
-
-
-def get_twitter_client():
-    consumer_key = os.getenv("TWITTER_CONSUMER_KEY")
-    consumer_secret = os.getenv("TWITTER_CONSUMER_SECRET")
-    access_token = os.getenv("TWITTER_ACCESS_TOKEN")
-    access_token_secret = os.getenv("TWITTER_ACCESS_TOKEN_SECRET")
-    bearer_token = os.getenv("TWITTER_BEARER_TOKEN")
-
-    twitter_client = tweepy.Client(consumer_key=consumer_key,
-                                   consumer_secret=consumer_secret,
-                                   access_token=access_token,
-                                   access_token_secret=access_token_secret,
-                                   bearer_token=bearer_token)
-
-    return twitter_client
 
 
 def get_tweet_text(area=DEFAULT_AREA):

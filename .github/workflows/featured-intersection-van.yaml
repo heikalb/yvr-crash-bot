@@ -7,6 +7,7 @@ on:
 
 jobs:
   post-tweet:
+    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     env:
       TWITTER_CONSUMER_KEY: ${{ secrets.TWITTER_CONSUMER_KEY }}
@@ -24,4 +25,4 @@ jobs:
       - name: Install requirements
         run: python3 -m pip install -r requirements.txt
       - name: Post tweet
-        run: python3 post_tweet.py "Vancouver"
+        run: python3 post_intersections.py "Vancouver"

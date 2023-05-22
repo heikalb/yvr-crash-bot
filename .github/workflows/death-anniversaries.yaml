@@ -1,9 +1,9 @@
-name: featured-intersection-rest
+name: death-anniversaries
 
 on:
   schedule:
-    # run at 18:28 PST on Tuesdays,Thursdays (GitHub actions in UTC)
-    - cron: '28 2 * * 3,5'
+    # run at 18:00 PST on everyday (GitHub actions in UTC)
+    - cron: '0 2 * * *'
 
 jobs:
   post-tweet:
@@ -25,4 +25,4 @@ jobs:
       - name: Install requirements
         run: python3 -m pip install -r requirements.txt
       - name: Post tweet
-        run: python3 post_intersections.py "Metro Vancouver"
+        run: python3 post_death_anniversaries.py
