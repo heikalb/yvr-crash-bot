@@ -2,8 +2,8 @@ name: death-anniversaries
 
 on:
   schedule:
-    # run at 18:40 PST on Tuesdays (GitHub actions in UTC)
-    - cron: '40 2 * * 3'
+    # run at 18:40 PST on Wednesdays (GitHub actions in UTC)
+    - cron: '40 2 * * 4'
 
 jobs:
   post-tweet:
