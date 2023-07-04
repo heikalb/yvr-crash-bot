@@ -45,7 +45,7 @@ def _get_crash_data(area=DEFAULT_AREA):
             next(reader)
             curr_muni = Path(fp).stem.capitalize()
             location_crashnums.extend((r[0], r[1], curr_muni)
-                                      for r in reader if int(r[1]) > MIN_CRASHES)
+                                      for r in reader if int(r[1].replace(',', '')) > MIN_CRASHES)
 
     return location_crashnums
 

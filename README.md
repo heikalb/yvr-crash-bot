@@ -6,6 +6,8 @@ A project of Vision Zero Vancouver: https://visionzerovancouver.ca/, https://twi
 ## Features
 1. Featured intersections: periodically tweet about intersections with many crashes over the years.
    Data from ICBC, https://public.tableau.com/app/profile/icbc/viz/LowerMainlandCrashes/LMDashboard.
+2. Traffic death anniversaries: tweet on specific carkilling events. Uses a custom dataset from ICBC
+   that had to be specifically requested for.
 
 ## Details
 - Twitter bot account: https://twitter.com/yvr_crash_bot
