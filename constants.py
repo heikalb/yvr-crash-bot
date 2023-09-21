@@ -11,5 +11,19 @@ AREA_2_FILE_GLOB = {"Vancouver": "data/intersections/vancouver.csv",
 MAX_SITE_NAME_LENGHTH = 100
 
 muni_accounts = {
-    "Vancouver": "@CityofVancouver"
+    "Vancouver": "@CityofVancouver",
+    "Burnaby": "@CityofBurnaby",
+    "Coquitlam": "@cityofcoquitlam",
+    "Delta": "@CityofDeltaBC",
+    "Langley": "@LangleyCity_",
+    "Maple Ridge": "@YourMapleRidge",
+    "New Westminster": "@New_Westminster",
+    "North Vancouver": "@CityOfNorthVan",
+    "Pitt Meadows": "@citypittmeadows",
+    "Port Coquitlam": "@CityofPoCo",
+    "Port Moody": "@CityofPoMo",
+    "Richmond": "@Richmond_BC",
+    "Surrey": "@CityofSurrey",
+    "West Vancouver": "@WestVanDistrict",
+    "White Rock": "@whiterockcity",
 }
