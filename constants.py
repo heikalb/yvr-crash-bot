@@ -9,3 +9,7 @@ AREA_2_FILE_GLOB = {"Vancouver": "data/intersections/vancouver.csv",
 
 # To avoid tweets too long
 MAX_SITE_NAME_LENGHTH = 100
+
+muni_accounts = {
+    "Vancouver": "@CityofVancouver"
+}
