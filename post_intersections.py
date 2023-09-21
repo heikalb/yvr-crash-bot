@@ -7,7 +7,7 @@ from pathlib import Path
 
 from utils import get_twitter_client
 from constants import ICBC_DATA_START_YEAR, ICBC_DATA_END_YEAR, MIN_CRASHES, \
-                      AREA_2_FILE_GLOB, DEFAULT_AREA, MAX_SITE_NAME_LENGHTH
+                      AREA_2_FILE_GLOB, DEFAULT_AREA, MAX_SITE_NAME_LENGHTH, muni_accounts
 
 
 def get_area():
@@ -22,13 +22,14 @@ def get_area():
 def get_tweet_text(area=DEFAULT_AREA):
     location_crashnums = _get_crash_data(area=area)
     site, num_crashes, muni = random.choice(location_crashnums)
+    muni_rep = muni_accounts.get(string.capwords(muni), string.capwords(muni))
     location_type = "intersection" if "&" in site else "street"
 
     if len(site) > MAX_SITE_NAME_LENGHTH:
         site = f"{site[:MAX_SITE_NAME_LENGHTH - 3]}..."
 
     ret_text = (f"Today's featured dangerous {location_type}:\n"
-                f"{string.capwords(site)}, {string.capwords(muni)}\n"
+                f"{string.capwords(site)}, {muni_rep}\n"
                 f"with {num_crashes} crashes causing injury or death "
                 f"{ICBC_DATA_START_YEAR}-{ICBC_DATA_END_YEAR}")
 
